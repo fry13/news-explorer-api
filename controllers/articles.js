@@ -35,7 +35,7 @@ const postArticle = (req, res, next) => {
     .then((article) => res.send({ data: article }))
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        throw new BadRequestError('Некорректные данные');
+        throw new BadRequestError();
       }
     })
     .catch(next);
@@ -47,7 +47,7 @@ const deleteArticle = (req, res, next) => {
     .then((article) => {
       const decoded = jwt.decode(req.headers.authorization.replace('Bearer ', ''));
       if (article.owner.toString() !== decoded.id) {
-        throw new ForbiddenError('Эту статью нельзя удалить');
+        throw new ForbiddenError();
       }
       Article.deleteOne({ _id: req.params.id })
         .then((deletedArticle) => res.send(deletedArticle));

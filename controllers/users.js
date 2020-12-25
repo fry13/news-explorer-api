@@ -16,14 +16,11 @@ const getMe = (req, res, next) => {
 };
 
 const registerUser = (req, res, next) => {
-  const { email, password, name } = req.body;
-  if (!email || !password || !name) {
-    throw new BadRequestError('Некорректные данные');
-  }
+  const { email, password, name } = req.body
   User.findOne({ email })
     .then((user) => {
       if (user) {
-        throw new ConflictError('E-mail уже занят');
+        throw new ConflictError();
       }
       return bcrypt.hash(password, 10);
     })
@@ -39,12 +36,12 @@ const registerUser = (req, res, next) => {
 const authUser = (req, res, next) => {
   const { email, password } = req.body;
   if (!email || !password) {
-    throw new BadRequestError('Некорректые данные');
+    throw new BadRequestError();
   }
   User.findOne({ email }).select('+password')
     .then((user) => {
       if (!user) {
-        throw new UnauthorizedError('Пользователя с таким E-mail не существует');
+        throw new UnauthorizedError();
       }
       bcrypt.compare(password, user.password)
         .then((matched) => {
@@ -53,7 +50,7 @@ const authUser = (req, res, next) => {
             res.send(`Bearer ${token}`);
             return;
           }
-          throw new UnauthorizedError('Неверный пароль');
+          throw new UnauthorizedError();
         }).catch(next);
     })
     .catch(next);

@@ -7,11 +7,11 @@ const UnauthorizedError = require('./errors/unauthorized');
 
 module.exports = (req, res, next) => {
   if (!req.headers.authorization) {
-    throw new UnauthorizedError('Вы не авторизованы');
+    throw new UnauthorizedError();
   }
   const token = req.headers.authorization.replace('Bearer ', '');
   if (!token) {
-    throw new UnauthorizedError('Вы не авторизованы');
+    throw new UnauthorizedError();
   }
 
   let payload;

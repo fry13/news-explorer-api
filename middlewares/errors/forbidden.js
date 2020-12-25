@@ -1,5 +1,7 @@
+const { ForbiddenErrorMsg } = require('../../configs/errMessages')
+
 class ForbiddenError extends Error {
-  constructor(message) {
+  constructor(message = ForbiddenErrorMsg) {
     super(message);
     this.statusCode = 403;
   }

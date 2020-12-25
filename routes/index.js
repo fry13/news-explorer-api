@@ -23,6 +23,6 @@ router.post('/signin', celebrate({
 
 router.use('/users', auth, usersRoutes);
 router.use('/articles', auth, articlesRoutes);
-router.all('*', () => { throw new NotFoundError('Запрашиваемый ресурс не найден'); });
+router.all('*', () => { throw new NotFoundError(); });
 
 module.exports = router;

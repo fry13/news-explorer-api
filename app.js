@@ -3,13 +3,14 @@ const mongoose = require('mongoose');
 const helmet = require('helmet');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const routes = require('./routes/index');
 require('dotenv').config();
+const routes = require('./routes/index');
 const rateLimiter = require('./middlewares/rateLimiter');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const errHandler = require('./middlewares/errHandler');
+const envConfig = require('./configs/envCfg')
 
-const { PORT, DB_URL } = process.env;
+const { PORT, DB_URL } = envConfig();
 const app = express();
 
 mongoose.connect(DB_URL, {

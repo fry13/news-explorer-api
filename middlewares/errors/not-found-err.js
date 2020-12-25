@@ -1,5 +1,7 @@
+const { NotFoundErrorMsg } = require('../../configs/errMessages')
+
 class NotFoundError extends Error {
-  constructor(message) {
+  constructor(message = NotFoundErrorMsg) {
     super(message);
     this.statusCode = 404;
   }
