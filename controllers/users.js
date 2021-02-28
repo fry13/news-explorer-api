@@ -47,7 +47,7 @@ const authUser = (req, res, next) => {
         .then((matched) => {
           if (matched) {
             const token = jwtSign(user._id);
-            res.send(`Bearer ${token}`);
+            res.send({ token });
             return;
           }
           throw new UnauthorizedError();
