@@ -17,7 +17,7 @@ router.post('/', celebrate({
     source: Joi.string().required(),
     link: Joi.string().required(),
     image: Joi.string().required(),
-    owner: Joi.string().hex().length(24),
+    owner: Joi.string().required(),
   }),
 }), auth, postArticle);
 
