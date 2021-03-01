@@ -32,7 +32,7 @@ const postArticle = (req, res, next) => {
     image,
     owner: req.user.id,
   })
-    .then((article) => res.send({ data: article }))
+    .then((article) => res.send(article))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         throw new BadRequestError();
