@@ -30,7 +30,7 @@ const postArticle = (req, res, next) => {
     source,
     link,
     image,
-    owner: req.user.id,
+    owner: req.user._id,
   })
     .then((article) => res.send(article))
     .catch((err) => {
