@@ -22,6 +22,7 @@ const postArticle = (req, res, next) => {
     link,
     image,
   } = req.body;
+  const owner = req.user.id;
   Article.create({
     keyword,
     title,
@@ -30,7 +31,7 @@ const postArticle = (req, res, next) => {
     source,
     link,
     image,
-    owner: req.user._id,
+    owner,
   })
     .then((article) => res.send(article))
     .catch((err) => {
