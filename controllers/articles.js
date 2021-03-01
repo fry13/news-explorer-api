@@ -22,7 +22,6 @@ const postArticle = (req, res, next) => {
     link,
     image,
   } = req.body;
-  const owner = req.user.id;
   Article.create({
     keyword,
     title,
@@ -31,9 +30,13 @@ const postArticle = (req, res, next) => {
     source,
     link,
     image,
-    owner,
+    owner: req.user.id,
   })
-    .then((article) => res.send({article}))
+   .then((article) => {
+      const newArticle = article.toObject();
+      delete newArticle.owner;
+      res.send(newArticle);
+    })
     .catch((err) => {
       if (err.name === 'ValidationError') {
         throw new BadRequestError();
