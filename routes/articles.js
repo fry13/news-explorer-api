@@ -13,7 +13,7 @@ router.post('/', celebrate({
     keyword: Joi.string().required(),
     title: Joi.string().required(),
     text: Joi.string().required(),
-    date: Joi.string().required().isoDate(),
+    date: Joi.string().required(),
     source: Joi.string().required(),
     link: Joi.string().regex(/(^https?:\/\/)?[a-z0-9~_\-.]+\.[a-z]{2,9}(\/|:|\?[!-~]*)?$/i).required(),
     image: Joi.string().regex(/(^https?:\/\/)?[a-z0-9~_\-.]+\.[a-z]{2,9}(\/|:|\?[!-~]*)?$/i).required(),
