@@ -7,7 +7,7 @@ router.get('/', getArticles);
 
 router.post('/', celebrate({
   headers: Joi.object({
-    authorization: Joi.string().required().regex(/[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$/),
+    authorization: Joi.string().required(),
   }).unknown(),
   body: Joi.object().keys({
     keyword: Joi.string().required(),
