@@ -8,7 +8,7 @@ const ForbiddenError = require('../middlewares/errors/forbidden');
 const getArticles = (req, res, next) => {
   const userId = req.user.id;
   Article.find({ owner: userId })
-    .then((articles) => res.send({ data: articles }))
+    .then((articles) => res.send(articles))
     .catch(next);
 };
 
